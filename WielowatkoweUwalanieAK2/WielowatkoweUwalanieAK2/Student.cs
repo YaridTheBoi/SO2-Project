@@ -8,7 +8,14 @@ namespace WielowatkoweUwalanieAK2
 {
     public class Student : Czlowiek //ta xD
     {
-        
+
+        private int id;
+
+        public Student(int id)
+        {
+            this.id = id;
+        }
+
         public void ProdukujWypociny()
         {
             while (true)
@@ -17,7 +24,7 @@ namespace WielowatkoweUwalanieAK2
                 switch (coRobi)
                 {
                     case 0:
-                        PijPiwo();
+                        //PijPiwo();
                         break;
                     case 1:
                         UdawajZeRozumieszAssemblera();
@@ -39,20 +46,165 @@ namespace WielowatkoweUwalanieAK2
             }
         }
 
-        public void UdawajZeRozumieszAssemblera()
+
+        //zrob zmienna co pinuje jaka prace oddalem
+        public void UdawajZeRozumieszAssemblera()   //projekt
         {
-            Console.WriteLine("Student szuka wskaznika na stos w watku {0}", Thread.CurrentThread.ManagedThreadId);
+            Program.mutex.WaitOne();
+            
+
+
+            if (Program.zaliczeniaProjektu.Contains(id))
+            {
+                Program.mutex.ReleaseMutex(); //ten student zrobil juz laby
+                return;
+            }
+            else
+            {
+                if (Program.zaliczeniaProjektu.Count(n => n == 0) == 2) //jezeli nikt nie oddal labow to oddaj 
+                {
+                    Console.WriteLine("Student {0} szuka wskaznika na stos w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                    Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, 0)] = id;
+                    Program.mutex.ReleaseMutex();
+                    return;
+                }
+                else
+                {                                   //jezeli ktos juz oddal laby
+                    if ((Program.zaliczeniaWykladu.Contains(id)) && (Program.zaliczeniaLabow.Contains(id))) //ale ja oddalem pozostale to oddaj
+                    {
+                        Console.WriteLine("Student {0} szuka wskaznika na stos w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                        Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, 0)] = id;
+                        Program.mutex.ReleaseMutex();
+                        return;
+                    }
+                    else if ((Program.zaliczeniaLabow.Contains(id) && Program.zaliczeniaWykladu.Contains(0))) //jak oddam bedzie dla mnie miejsce na wyklad
+                    {
+                        Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                        Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, 0)] = id;
+                        Program.mutex.ReleaseMutex();
+                        return;
+                    }
+                    else if ((Program.zaliczeniaWykladu.Contains(id) && Program.zaliczeniaLabow.Contains(0))) //jak oddam bedzie dla mnie miejsce na laby
+                    {
+                        Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                        Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, 0)] = id;
+                        Program.mutex.ReleaseMutex();
+                        return;
+                    }
+                }
+                Program.mutex.ReleaseMutex();
+                return;
+
+            }
+
+
         }
 
 
-        public void ModlSieDoBiernata()
+        public void ModlSieDoBiernata() //wyklad
         {
-            Console.WriteLine("Student zbiera na warunek w watku {0}", Thread.CurrentThread.ManagedThreadId);
+            Program.mutex.WaitOne();
+            
+            if (Program.zaliczeniaWykladu.Contains(id))
+            {
+                Program.mutex.ReleaseMutex(); //ten student zrobil juz laby
+                return;
+            }
+            else
+            {
+                if (Program.zaliczeniaWykladu.Count(n => n == 0) == 2) //jezeli nikt nie oddal labow to oddaj 
+                {
+                    Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                    Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, 0)] = id;
+                    Program.mutex.ReleaseMutex();
+                    return;
+                }
+                else
+                {                                   //jezeli ktos juz oddal laby
+                    if ((Program.zaliczeniaProjektu.Contains(id)) && (Program.zaliczeniaLabow.Contains(id))) //ale ja oddalem pozostale to oddaj
+                    {
+                        Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                        Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, 0)] = id;
+                        Program.mutex.ReleaseMutex();
+                        return;
+                    }
+
+                    else if ((Program.zaliczeniaProjektu.Contains(id) && Program.zaliczeniaLabow.Contains(0))) //jak oddam bedzie dla mnie miejsce na laby
+                    {
+                        Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                        Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, 0)] = id;
+                        Program.mutex.ReleaseMutex();
+                        return;
+                    }
+                    else if ((Program.zaliczeniaLabow.Contains(id) && Program.zaliczeniaProjektu.Contains(0))) //jak oddam bedzie dla mnie miejsce na projekt
+                    {
+                        Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                        Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, 0)] = id;
+                        Program.mutex.ReleaseMutex();
+                        return;
+                    }
+
+
+                }
+                Program.mutex.ReleaseMutex();
+                return;
+
+            }
+
+
+
         }
 
-        public void UczSieDokumentacjiIntelaNaPamiec()
+        public void UczSieDokumentacjiIntelaNaPamiec()  //laby
         {
-            Console.WriteLine("Student zapomnial uwzglednic przeniesienia w watku {0}", Thread.CurrentThread.ManagedThreadId);
+            Program.mutex.WaitOne();
+            
+            
+            if (Program.zaliczeniaLabow.Contains(id))
+            {
+                Program.mutex.ReleaseMutex(); //ten student zrobil juz laby
+                return;
+            }
+            else
+            {
+                if (Program.zaliczeniaLabow.Count(n => n==0) == 2) //jezeli nikt nie oddal labow to oddaj 
+                {
+                    Console.WriteLine("Student {0} zapomnial uwzglednic przeniesienia w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                    Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, 0)] = id;
+                    Program.mutex.ReleaseMutex();
+                    return;
+                }
+                else
+                {                                   //jezeli ktos juz oddal laby
+                    if ((Program.zaliczeniaProjektu.Contains(id)) && (Program.zaliczeniaWykladu.Contains(id))) //ale ja oddalem pozostale to oddaj
+                    {
+                        Console.WriteLine("Student {0} zapomnial uwzglednic przeniesienia w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                        Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, 0)] = id;
+                        Program.mutex.ReleaseMutex();
+                        return;
+                    }
+
+                    else if ((Program.zaliczeniaProjektu.Contains(id) && Program.zaliczeniaWykladu.Contains(0))) //jak oddam bedzie dla mnie miejsce na wyklad
+                    {
+                        Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                        Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, 0)] = id;
+                        Program.mutex.ReleaseMutex();
+                        return;
+                    }
+                    else if ((Program.zaliczeniaWykladu.Contains(id) && Program.zaliczeniaProjektu.Contains(0))) //jak oddam bedzie dla mnie miejsce na projekt
+                    {
+                        Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
+                        Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, 0)] = id;
+                        Program.mutex.ReleaseMutex();
+                        return;
+                    }
+
+                }
+                Program.mutex.ReleaseMutex();
+                return;
+
+            }
+
         }
     }
 }

@@ -11,7 +11,7 @@ namespace WielowatkoweUwalanieAK2
         public Random random = new Random();
         public void PijPiwo()
         {
-            Console.WriteLine("Piwo jest pite w watku {0}", Thread.CurrentThread.ManagedThreadId);
+            //Console.WriteLine("Piwo jest pite w watku {0}", Thread.CurrentThread.ManagedThreadId);
             Thread.Sleep(random.Next(500, 2500));
         }
 

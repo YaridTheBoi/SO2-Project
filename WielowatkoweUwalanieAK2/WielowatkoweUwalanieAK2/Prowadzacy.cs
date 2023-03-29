@@ -11,6 +11,21 @@ namespace WielowatkoweUwalanieAK2
 
 
 
+        private int id;
+
+        public Prowadzacy(int id)
+        {
+            this.id = id;
+        }
+
+        private bool sprawdzCzyStudentOddalWszystko(int idStudenta)
+        {
+            if (Program.zaliczeniaProjektu.Contains(idStudenta) && Program.zaliczeniaWykladu.Contains(idStudenta) && Program.zaliczeniaLabow.Contains(idStudenta))
+            {
+                return true;
+            }
+            return false;
+        }
 
 
         public void UwalajStudentow()
@@ -21,7 +36,7 @@ namespace WielowatkoweUwalanieAK2
                 switch (coRobi)
                 {
                     case 0:
-                        PijPiwo();
+                        //PijPiwo();
                         break;
                     case 1:
                         Wystaw2Zero();
@@ -41,12 +56,45 @@ namespace WielowatkoweUwalanieAK2
 
         public void Wystaw2Zero()
         {
-            Console.WriteLine("Prowadacy uwalil studenta w watku {0}", Thread.CurrentThread.ManagedThreadId);
+            Program.mutex.WaitOne();
+            
+            for(int i =0; i<3; i++)
+            {
+                if (sprawdzCzyStudentOddalWszystko(i + 1))
+                {
+                    Console.WriteLine("Prowadacy uwalil studenta {0} w watku {1}", i+1 ,Thread.CurrentThread.ManagedThreadId);
+                    Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, i + 1)] = 0;
+                    Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, i + 1)] = 0;
+                    Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, i + 1)] = 0;
+                    Program.mutex.ReleaseMutex();
+                    return;
+                }
+
+            }
+            Program.mutex.ReleaseMutex();
+            return;
         }
 
         public void Wystaw3Zero()
         {
-            Console.WriteLine("Prowadzacy sie zlitowal w watku {0}", Thread.CurrentThread.ManagedThreadId);
+            Program.mutex.WaitOne();
+
+            for (int i = 0; i < 3; i++)
+            {
+                if (sprawdzCzyStudentOddalWszystko(i + 1))
+                {
+                    Console.WriteLine("Prowadacy zlitowal sie nad studentem {0} w watku {1}", i + 1, Thread.CurrentThread.ManagedThreadId);
+
+                    Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, i + 1)] = 0;
+                    Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, i + 1)] = 0;
+                    Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, i + 1)] = 0;
+                    Program.mutex.ReleaseMutex();
+                    return;
+                }
+
+            }
+            Program.mutex.ReleaseMutex();
+            return;
         }
     }
 }
