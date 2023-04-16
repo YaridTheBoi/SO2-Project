@@ -56,7 +56,7 @@ namespace WielowatkoweUwalanieAK2
 
             if (Program.zaliczeniaProjektu.Contains(id))
             {
-                Program.mutex.ReleaseMutex(); //ten student zrobil juz laby
+                Program.mutex.ReleaseMutex(); //ten student zrobil juz projekt
                 return;
             }
             else
@@ -68,7 +68,7 @@ namespace WielowatkoweUwalanieAK2
                     Program.mutex.ReleaseMutex();
                     return;
                 }
-                else
+                else if (Program.zaliczeniaProjektu.Contains(0))
                 {                                   //jezeli ktos juz oddal laby
                     if ((Program.zaliczeniaWykladu.Contains(id)) && (Program.zaliczeniaLabow.Contains(id))) //ale ja oddalem pozostale to oddaj
                     {
@@ -107,7 +107,7 @@ namespace WielowatkoweUwalanieAK2
             
             if (Program.zaliczeniaWykladu.Contains(id))
             {
-                Program.mutex.ReleaseMutex(); //ten student zrobil juz laby
+                Program.mutex.ReleaseMutex(); //ten student zrobil juz wyklad
                 return;
             }
             else
@@ -119,7 +119,7 @@ namespace WielowatkoweUwalanieAK2
                     Program.mutex.ReleaseMutex();
                     return;
                 }
-                else
+                else if (Program.zaliczeniaWykladu.Contains(0))
                 {                                   //jezeli ktos juz oddal laby
                     if ((Program.zaliczeniaProjektu.Contains(id)) && (Program.zaliczeniaLabow.Contains(id))) //ale ja oddalem pozostale to oddaj
                     {
@@ -174,7 +174,7 @@ namespace WielowatkoweUwalanieAK2
                     Program.mutex.ReleaseMutex();
                     return;
                 }
-                else
+                else if (Program.zaliczeniaLabow.Contains(0))
                 {                                   //jezeli ktos juz oddal laby
                     if ((Program.zaliczeniaProjektu.Contains(id)) && (Program.zaliczeniaWykladu.Contains(id))) //ale ja oddalem pozostale to oddaj
                     {
