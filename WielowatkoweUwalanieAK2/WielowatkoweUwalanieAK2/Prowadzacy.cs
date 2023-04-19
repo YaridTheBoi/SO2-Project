@@ -51,9 +51,7 @@ namespace WielowatkoweUwalanieAK2
                 }
 
                 PijPiwo();
-                Console.WriteLine("Projekt: [ {0} , {1} ]", Program.zaliczeniaProjektu[0],Program.zaliczeniaProjektu[1]);
-                Console.WriteLine("Wyklad: [ {0} , {1} ]", Program.zaliczeniaWykladu[0],Program.zaliczeniaWykladu[1]);
-                Console.WriteLine("Laby: [ {0} , {1} ]", Program.zaliczeniaLabow[0],Program.zaliczeniaLabow[1]);
+          
             }
         }
 
@@ -70,6 +68,8 @@ namespace WielowatkoweUwalanieAK2
                     Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, i + 1)] = 0;
                     Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, i + 1)] = 0;
                     Program.mutex.ReleaseMutex();
+
+                    PokazBufory();
                     return;
                 }
 
@@ -92,6 +92,8 @@ namespace WielowatkoweUwalanieAK2
                     Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, i + 1)] = 0;
                     Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, i + 1)] = 0;
                     Program.mutex.ReleaseMutex();
+
+                    PokazBufory();
                     return;
                 }
 

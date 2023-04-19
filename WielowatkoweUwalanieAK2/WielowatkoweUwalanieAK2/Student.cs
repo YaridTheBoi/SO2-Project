@@ -66,6 +66,8 @@ namespace WielowatkoweUwalanieAK2
                     Console.WriteLine("Student {0} szuka wskaznika na stos w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                     Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, 0)] = id;
                     Program.mutex.ReleaseMutex();
+
+                    PokazBufory();
                     return;
                 }
                 else if (Program.zaliczeniaProjektu.Contains(0))
@@ -75,6 +77,8 @@ namespace WielowatkoweUwalanieAK2
                         Console.WriteLine("Student {0} szuka wskaznika na stos w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                         Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, 0)] = id;
                         Program.mutex.ReleaseMutex();
+
+                        PokazBufory();
                         return;
                     }
                     else if ((Program.zaliczeniaLabow.Contains(id) && Program.zaliczeniaWykladu.Contains(0))) //jak oddam bedzie dla mnie miejsce na wyklad
@@ -82,6 +86,8 @@ namespace WielowatkoweUwalanieAK2
                         Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                         Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, 0)] = id;
                         Program.mutex.ReleaseMutex();
+
+                        PokazBufory();
                         return;
                     }
                     else if ((Program.zaliczeniaWykladu.Contains(id) && Program.zaliczeniaLabow.Contains(0))) //jak oddam bedzie dla mnie miejsce na laby
@@ -89,6 +95,8 @@ namespace WielowatkoweUwalanieAK2
                         Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                         Program.zaliczeniaProjektu[Array.IndexOf(Program.zaliczeniaProjektu, 0)] = id;
                         Program.mutex.ReleaseMutex();
+
+                        PokazBufory();
                         return;
                     }
                 }
@@ -117,6 +125,8 @@ namespace WielowatkoweUwalanieAK2
                     Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                     Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, 0)] = id;
                     Program.mutex.ReleaseMutex();
+
+                    PokazBufory();
                     return;
                 }
                 else if (Program.zaliczeniaWykladu.Contains(0))
@@ -126,6 +136,8 @@ namespace WielowatkoweUwalanieAK2
                         Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                         Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, 0)] = id;
                         Program.mutex.ReleaseMutex();
+
+                        PokazBufory();
                         return;
                     }
 
@@ -134,6 +146,8 @@ namespace WielowatkoweUwalanieAK2
                         Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                         Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, 0)] = id;
                         Program.mutex.ReleaseMutex();
+
+                        PokazBufory();
                         return;
                     }
                     else if ((Program.zaliczeniaLabow.Contains(id) && Program.zaliczeniaProjektu.Contains(0))) //jak oddam bedzie dla mnie miejsce na projekt
@@ -141,6 +155,8 @@ namespace WielowatkoweUwalanieAK2
                         Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                         Program.zaliczeniaWykladu[Array.IndexOf(Program.zaliczeniaWykladu, 0)] = id;
                         Program.mutex.ReleaseMutex();
+
+                        PokazBufory();
                         return;
                     }
 
@@ -172,6 +188,8 @@ namespace WielowatkoweUwalanieAK2
                     Console.WriteLine("Student {0} zapomnial uwzglednic przeniesienia w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                     Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, 0)] = id;
                     Program.mutex.ReleaseMutex();
+
+                    PokazBufory();
                     return;
                 }
                 else if (Program.zaliczeniaLabow.Contains(0))
@@ -181,6 +199,8 @@ namespace WielowatkoweUwalanieAK2
                         Console.WriteLine("Student {0} zapomnial uwzglednic przeniesienia w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                         Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, 0)] = id;
                         Program.mutex.ReleaseMutex();
+
+                        PokazBufory();
                         return;
                     }
 
@@ -189,6 +209,8 @@ namespace WielowatkoweUwalanieAK2
                         Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                         Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, 0)] = id;
                         Program.mutex.ReleaseMutex();
+
+                        PokazBufory();
                         return;
                     }
                     else if ((Program.zaliczeniaWykladu.Contains(id) && Program.zaliczeniaProjektu.Contains(0))) //jak oddam bedzie dla mnie miejsce na projekt
@@ -196,6 +218,8 @@ namespace WielowatkoweUwalanieAK2
                         Console.WriteLine("Student {0} zbiera na warunek w watku {1}", id, Thread.CurrentThread.ManagedThreadId);
                         Program.zaliczeniaLabow[Array.IndexOf(Program.zaliczeniaLabow, 0)] = id;
                         Program.mutex.ReleaseMutex();
+
+                        PokazBufory();
                         return;
                     }
 
