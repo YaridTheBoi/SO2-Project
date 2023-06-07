@@ -9,6 +9,8 @@ namespace WielowatkoweUwalanieAK2
     public class Czlowiek
     {
         public Random random = new Random();
+        protected int id;
+
         public void PijPiwo()
         {
             //Console.WriteLine("Piwo jest pite w watku {0}", Thread.CurrentThread.ManagedThreadId);
@@ -20,6 +22,7 @@ namespace WielowatkoweUwalanieAK2
             Console.WriteLine("Projekt: [ {0} , {1} ]", Program.zaliczeniaProjektu[0],Program.zaliczeniaProjektu[1]);
             Console.WriteLine("Wyklad: [ {0} , {1} ]", Program.zaliczeniaWykladu[0],Program.zaliczeniaWykladu[1]);
             Console.WriteLine("Laby: [ {0} , {1} ]", Program.zaliczeniaLabow[0],Program.zaliczeniaLabow[1]);
+            Console.WriteLine('\n');
         }
 
     }

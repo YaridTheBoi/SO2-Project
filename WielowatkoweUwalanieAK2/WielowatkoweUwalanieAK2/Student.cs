@@ -8,9 +8,6 @@ namespace WielowatkoweUwalanieAK2
 {
     public class Student : Czlowiek //ta xD
     {
-
-        private int id;
-
         public Student(int id)
         {
             this.id = id;
@@ -24,7 +21,7 @@ namespace WielowatkoweUwalanieAK2
                 switch (coRobi)
                 {
                     case 0:
-                        //PijPiwo();
+                        //PijPiwo();    //za duzo picia piwa wychodzi
                         break;
                     case 1:
                         UdawajZeRozumieszAssemblera();

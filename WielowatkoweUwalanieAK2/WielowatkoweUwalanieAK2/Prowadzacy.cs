@@ -9,10 +9,6 @@ namespace WielowatkoweUwalanieAK2
     public class Prowadzacy : Czlowiek
     {
 
-
-
-        private int id;
-
         public Prowadzacy(int id)
         {
             this.id = id;
@@ -20,13 +16,8 @@ namespace WielowatkoweUwalanieAK2
 
         private bool sprawdzCzyStudentOddalWszystko(int idStudenta)
         {
-            if (Program.zaliczeniaProjektu.Contains(idStudenta) && Program.zaliczeniaWykladu.Contains(idStudenta) && Program.zaliczeniaLabow.Contains(idStudenta))
-            {
-                return true;
-            }
-            return false;
+            return (Program.zaliczeniaProjektu.Contains(idStudenta) && Program.zaliczeniaWykladu.Contains(idStudenta) && Program.zaliczeniaLabow.Contains(idStudenta));
         }
-
 
         public void UwalajStudentow()
         {
@@ -36,7 +27,7 @@ namespace WielowatkoweUwalanieAK2
                 switch (coRobi)
                 {
                     case 0:
-                        //PijPiwo();
+                        //PijPiwo();    //za duzo piwa 
                         break;
                     case 1:
                         Wystaw2Zero();
