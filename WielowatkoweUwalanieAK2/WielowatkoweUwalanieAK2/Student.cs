@@ -48,9 +48,6 @@ namespace WielowatkoweUwalanieAK2
         public void UdawajZeRozumieszAssemblera()   //projekt
         {
             Program.mutex.WaitOne();
-            
-
-
             if (Program.zaliczeniaProjektu.Contains(id))
             {
                 Program.mutex.ReleaseMutex(); //ten student zrobil juz projekt
@@ -99,10 +96,7 @@ namespace WielowatkoweUwalanieAK2
                 }
                 Program.mutex.ReleaseMutex();
                 return;
-
             }
-
-
         }
 
 
